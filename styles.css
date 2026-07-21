@@ -308,23 +308,10 @@ h3 {
   position: absolute;
   top: clamp(132px, 14vw, 198px);
   left: clamp(128px, 15vw, 235px);
-  color: var(--pink);
-  font-size: clamp(3.8rem, 7vw, 7.2rem);
-  font-weight: 900;
-  transform: rotate(-4deg);
-}
-
-.hero-doodle::before {
-  content: "";
-  position: absolute;
-  top: 32%;
-  left: -130%;
-  width: 165%;
-  height: 90%;
-  border: 10px dashed var(--pink);
-  border-color: transparent transparent var(--pink) var(--pink);
-  border-radius: 0 0 60% 55%;
-  transform: rotate(-25deg);
+  width: clamp(130px, 13vw, 225px);
+  transform: rotate(-12deg);
+  pointer-events: none;
+  user-select: none;
 }
 
 .button {
@@ -971,6 +958,15 @@ blockquote cite {
   text-transform: uppercase;
 }
 
+.footer-contact {
+  display: grid;
+  gap: 8px;
+}
+
+.footer-contact p {
+  margin: 0;
+}
+
 .site-footer a {
   color: var(--yellow);
   font-size: clamp(1.35rem, 3vw, 2rem);
@@ -1151,15 +1147,12 @@ blockquote cite {
   }
 
   .hero-doodle {
-    top: 94px;
-    left: 20px;
+    top: 126px;
+    left: 16px;
     z-index: 1;
-    font-size: 3rem;
-    opacity: 0.9;
-  }
-
-  .hero-doodle::before {
-    border-width: 5px;
+    width: 74px;
+    opacity: 0.92;
+    transform: rotate(-20deg);
   }
 
   h1 {
@@ -1225,7 +1218,13 @@ blockquote cite {
   }
 
   .intro-section {
-    padding: 42px 16px 310px;
+    display: block;
+    min-height: auto;
+    padding: 42px 16px;
+  }
+
+  .intro-section .section-copy {
+    max-width: none;
   }
 
   .intro-section h2 {
@@ -1247,23 +1246,23 @@ blockquote cite {
   }
 
   .intro-piano-blob {
-    right: -250px;
-    bottom: 18px;
-    width: 500px;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(148vw, 540px);
+    max-width: none;
+    margin: 18px -158px 0 auto;
   }
 
   .intro-children {
-    left: 24px;
+    left: 18px;
     right: auto;
-    bottom: 18px;
-    width: 132px;
+    bottom: 22px;
+    width: 118px;
   }
 
   .intro-doodle {
-    left: auto;
-    right: 22px;
-    top: 132px;
-    width: 84px;
+    display: none;
   }
 
   .educator-section .section-media {
@@ -1297,6 +1296,15 @@ blockquote cite {
 
   .book-section {
     gap: 24px;
+  }
+
+  .book-blob {
+    display: none;
+  }
+
+  .book-copy {
+    position: relative;
+    z-index: 2;
   }
 
   .price-card {
