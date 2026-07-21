@@ -132,8 +132,8 @@
         </div>
         <div class="photo-strip">
           <img src="assets/web/music-tuition.jpg" alt="Children learning keyboard together" loading="lazy" decoding="async" />
-          <img src="assets/web/movement-stretch.jpg" alt="Children stretching on exercise mats" loading="lazy" decoding="async" />
-          <img src="assets/web/movement-class.jpg" alt="Children in a movement class" loading="lazy" decoding="async" />
+          <img src="assets/web/movement-stretch-clean.jpg" alt="Children stretching on exercise mats" loading="lazy" decoding="async" />
+          <img src="assets/web/movement-class-clean.jpg" alt="Children in a movement class" loading="lazy" decoding="async" />
         </div>
       </section>
 
@@ -232,7 +232,11 @@
 
       <section id="educator" class="split-section educator-section">
         <div class="section-media">
-          <img class="educator-portrait" src="assets/web/educator-tendai.png" alt="Tendai, WonderWorks Holiday Club educator" loading="lazy" decoding="async" />
+          <div class="educator-photo-stack" aria-hidden="true">
+            <img class="educator-pink-frame" src="assets/web/educator-pink-flower-cutout.png" alt="" loading="lazy" decoding="async" />
+            <img class="educator-portrait" src="assets/web/educator-tendai-overlay.png" alt="" loading="lazy" decoding="async" />
+          </div>
+          <span class="sr-only">Tendai, WonderWorks Holiday Club educator</span>
         </div>
         <div class="section-copy">
           <p class="deck-label">WonderWorks Holiday Club</p>
@@ -255,9 +259,102 @@
             <strong>£200 for the week</strong>
             <span>(£40 per day)</span>
           </div>
-          <a class="button button-primary" href="tel:07383008268">Contact : 07383008268</a>
         </div>
-        <img class="book-photo cloud-frame" src="assets/web/hero-music.jpg" alt="Children enjoying music at WonderWorks" loading="lazy" decoding="async" />
+        <form class="booking-form" data-stripe-payment-link="" novalidate>
+          <fieldset>
+            <legend>Parent or guardian details</legend>
+            <label>
+              Your full name
+              <input type="text" name="guardianName" autocomplete="name" required />
+            </label>
+            <label>
+              Mobile number
+              <input type="tel" name="guardianPhone" autocomplete="tel" required />
+            </label>
+            <label>
+              Email address
+              <input type="email" name="guardianEmail" autocomplete="email" required />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Child’s details</legend>
+            <label>
+              Child’s full name
+              <input type="text" name="childName" required />
+            </label>
+            <label>
+              Age
+              <select name="childAge" required>
+                <option value="">Select age</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+              </select>
+            </label>
+            <label class="full-width">
+              Allergies, medical conditions or medication
+              <textarea name="medicalInfo" rows="4" required></textarea>
+            </label>
+            <label>
+              Emergency contact name
+              <input type="text" name="emergencyName" required />
+            </label>
+            <label>
+              Emergency contact number
+              <input type="tel" name="emergencyPhone" required />
+            </label>
+          </fieldset>
+
+          <fieldset class="choice-group" data-week-group>
+            <legend>Which week or weeks</legend>
+            <label>
+              <input type="checkbox" name="weeks" value="Week 1, 10 to 14 August, Firm Foundations" />
+              <span>Week 1, 10 to 14 August, Firm Foundations</span>
+            </label>
+            <label>
+              <input type="checkbox" name="weeks" value="Week 2, 17 to 21 August, One Body, One Song" />
+              <span>Week 2, 17 to 21 August, One Body, One Song</span>
+            </label>
+            <label>
+              <input type="checkbox" name="weeks" value="Week 3, 24 to 28 August, Shine Bright" />
+              <span>Week 3, 24 to 28 August, Shine Bright</span>
+            </label>
+          </fieldset>
+
+          <fieldset class="choice-group">
+            <legend>Keepsake recording consent</legend>
+            <label>
+              <input type="radio" name="recordingConsent" value="Yes, my child would like to take part" required />
+              <span>Yes, my child would like to take part</span>
+            </label>
+            <label>
+              <input type="radio" name="recordingConsent" value="No, my child would rather not record this year" required />
+              <span>No, my child would rather not record this year</span>
+            </label>
+          </fieldset>
+
+          <fieldset class="choice-group">
+            <legend>Marketing photos consent</legend>
+            <label>
+              <input type="radio" name="photoConsent" value="Yes, WonderWorks may use general photos of my child" required />
+              <span>Yes, WonderWorks may use general photos of my child</span>
+            </label>
+            <label>
+              <input type="radio" name="photoConsent" value="No, please do not use photos of my child" required />
+              <span>No, please do not use photos of my child</span>
+            </label>
+          </fieldset>
+
+          <label class="agreement">
+            <input type="checkbox" name="termsAgreement" required />
+            <span>I confirm I’ve read the booking terms and cancellation information.</span>
+          </label>
+
+          <p class="booking-feedback" role="status" aria-live="polite"></p>
+          <button class="button button-primary" type="submit">Continue to payment</button>
+        </form>
       </section>
     </main>
 
