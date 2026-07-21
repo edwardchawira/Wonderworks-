@@ -936,11 +936,19 @@ blockquote cite {
 .booking-feedback {
   min-height: 1.35em;
   margin: 0;
+  padding: 0;
+  border-radius: 16px;
   color: var(--blue);
   font-weight: 900;
 }
 
+.booking-feedback:not(:empty) {
+  padding: 12px 14px;
+  background: rgba(255, 193, 7, 0.22);
+}
+
 .booking-feedback.error {
+  background: rgba(238, 130, 189, 0.2);
   color: #b51f69;
 }
 

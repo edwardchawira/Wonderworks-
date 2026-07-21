@@ -2,6 +2,7 @@ const body = document.body;
 const menuToggle = document.querySelector(".menu-toggle");
 const navLinks = [...document.querySelectorAll(".primary-nav a")];
 const bookingForm = document.querySelector(".booking-form");
+const bookingEmail = "info@tentasolutions.co.uk";
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
@@ -34,7 +35,7 @@ const observer = new IntersectionObserver(
 
 sections.forEach((section) => observer.observe(section));
 
-bookingForm?.addEventListener("submit", async (event) => {
+bookingForm?.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const feedback = bookingForm.querySelector(".booking-feedback");
@@ -62,57 +63,45 @@ bookingForm?.addEventListener("submit", async (event) => {
   bookingDetails.bookingReference = bookingReference;
   localStorage.setItem("wonderworksBooking", JSON.stringify(bookingDetails));
 
-  const submitButton = bookingForm.querySelector('button[type="submit"]');
-  const paymentLink = bookingForm.dataset.stripePaymentLink?.trim();
-  const originalButtonText = submitButton?.textContent;
-  if (submitButton) {
-    submitButton.disabled = true;
-    submitButton.textContent = "Preparing payment...";
-  }
+  const subject = `WonderWorks booking request - ${bookingDetails.childName}`;
+  const bodyLines = [
+    "WonderWorks Holiday Club booking request",
+    "",
+    `Booking reference: ${bookingReference}`,
+    "",
+    "Parent or guardian details",
+    `Full name: ${bookingDetails.guardianName}`,
+    `Mobile number: ${bookingDetails.guardianPhone}`,
+    `Email address: ${bookingDetails.guardianEmail}`,
+    "",
+    "Child's details",
+    `Child's full name: ${bookingDetails.childName}`,
+    `Age: ${bookingDetails.childAge}`,
+    `Allergies, medical conditions or medication: ${bookingDetails.medicalInfo}`,
+    `Emergency contact name: ${bookingDetails.emergencyName}`,
+    `Emergency contact number: ${bookingDetails.emergencyPhone}`,
+    "",
+    "Selected week or weeks",
+    ...selectedWeeks.map((week) => `- ${week}`),
+    "",
+    "Keepsake recording consent",
+    bookingDetails.recordingConsent,
+    "",
+    "Marketing photos consent",
+    bookingDetails.photoConsent,
+    "",
+    "Final agreement",
+    "Parent or guardian confirmed they have read the booking terms and cancellation information.",
+  ];
+  const mailto = new URL(`mailto:${bookingEmail}`);
+  mailto.searchParams.set("subject", subject);
+  mailto.searchParams.set("body", bodyLines.join("\n"));
+
   if (feedback) {
-    feedback.textContent = "";
+    feedback.textContent = `Your booking email is addressed to ${bookingEmail}. Please send it from your email app. Reference: ${bookingReference}.`;
     feedback.classList.remove("error");
   }
-
-  try {
-    const response = await fetch("/api/create-checkout-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bookingDetails),
-    });
-    const result = await response.json();
-
-    if (!response.ok || !result.url) {
-      throw new Error(result.error || "Unable to start Stripe Checkout.");
-    }
-
-    window.location.href = result.url;
-    return;
-  } catch (error) {
-    if (paymentLink) {
-      try {
-        const stripeUrl = new URL(paymentLink);
-        stripeUrl.searchParams.set("prefilled_email", formData.get("guardianEmail"));
-        stripeUrl.searchParams.set("client_reference_id", bookingReference);
-        window.location.href = stripeUrl.toString();
-        return;
-      } catch {
-        // Fall through to the form message below.
-      }
-    }
-
-    if (feedback) {
-      feedback.textContent =
-        error.message === "Stripe is not configured yet."
-          ? "Booking details are ready. Add the Stripe secret key on the server to enable payment."
-          : error.message;
-      feedback.classList.add("error");
-    }
-    if (submitButton) {
-      submitButton.disabled = false;
-      submitButton.textContent = originalButtonText;
-    }
-  }
+  window.location.href = mailto.toString();
 });
 
 bookingForm?.querySelectorAll('input[name="weeks"]').forEach((input) => {
