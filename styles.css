@@ -24,6 +24,7 @@ html {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--cream);
   color: var(--ink);
   font-family: "Nunito", Arial, sans-serif;
@@ -61,6 +62,7 @@ img {
   justify-content: space-between;
   gap: 18px;
   padding: 12px clamp(16px, 4vw, 48px);
+  padding-top: max(12px, env(safe-area-inset-top));
   background: rgba(255, 244, 230, 0.98);
   border-bottom: 4px solid rgba(36, 95, 175, 0.12);
 }
@@ -88,6 +90,9 @@ img {
 }
 
 .primary-nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   padding: 8px 13px;
   border-radius: 999px;
   color: var(--blue);
@@ -117,6 +122,7 @@ img {
   border: 4px solid var(--blue);
   border-radius: 14px;
   background: var(--yellow);
+  cursor: pointer;
 }
 
 .menu-toggle span:not(.sr-only) {
@@ -333,6 +339,7 @@ h3 {
   font-weight: 900;
   line-height: 1.1;
   text-decoration: none;
+  cursor: pointer;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
@@ -1057,19 +1064,41 @@ blockquote cite {
 
 @media (max-width: 760px) {
   html {
-    scroll-padding-top: 72px;
+    scroll-padding-top: 68px;
+  }
+
+  .site-header {
+    gap: 10px;
+    min-height: 68px;
+    padding: 8px 14px;
+    padding-top: max(8px, env(safe-area-inset-top));
+  }
+
+  .brand {
+    gap: 8px;
+    font-size: clamp(1rem, 5.2vw, 1.25rem);
+  }
+
+  .star-logo {
+    width: 38px;
+    height: 38px;
   }
 
   .menu-toggle {
     display: block;
+    flex: 0 0 auto;
+    width: 46px;
+    height: 42px;
   }
 
   .primary-nav {
     position: fixed;
-    inset: 72px 14px auto;
+    inset: calc(68px + env(safe-area-inset-top)) 12px auto;
     display: none;
     flex-direction: column;
     align-items: stretch;
+    max-height: calc(100svh - 86px);
+    overflow-y: auto;
     padding: 16px;
     border: 5px solid var(--blue);
     border-radius: 22px;
@@ -1082,45 +1111,68 @@ blockquote cite {
   }
 
   .primary-nav a {
+    min-height: 50px;
+    justify-content: center;
     padding: 13px 16px;
+    font-size: 1.05rem;
   }
 
   section {
-    padding-block: 52px;
+    padding: 52px 16px;
   }
 
   .hero {
+    display: flex;
     min-height: calc(100svh - 68px);
-    padding-top: 96px;
-    padding-bottom: 270px;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 76px 16px 205px;
   }
 
   .hero-copy {
+    z-index: 6;
+    width: min(100%, 430px);
     transform: none;
   }
 
   .hero-location {
-    font-size: clamp(1rem, 5vw, 1.35rem);
-    margin-bottom: 12px;
+    max-width: 16rem;
+    margin: 0 auto 10px;
+    font-size: clamp(1rem, 4.9vw, 1.28rem);
+    line-height: 1.12;
   }
 
   .hero-doodle {
-    top: 86px;
-    left: 52px;
-    font-size: 3.6rem;
+    top: 94px;
+    left: 20px;
+    z-index: 1;
+    font-size: 3rem;
     opacity: 0.9;
   }
 
   .hero-doodle::before {
-    border-width: 6px;
+    border-width: 5px;
   }
 
   h1 {
-    font-size: clamp(3.2rem, 16vw, 5rem);
+    font-size: clamp(3.1rem, 15vw, 4.35rem);
+    line-height: 0.82;
+  }
+
+  h1 span:last-child {
+    margin-left: clamp(18px, 8vw, 42px);
+  }
+
+  h2 {
+    font-size: clamp(2.35rem, 12vw, 3.8rem);
   }
 
   .hero-strip {
-    font-size: clamp(1rem, 4.2vw, 1.35rem);
+    max-width: 100%;
+    margin-top: 18px;
+    padding: 9px 14px;
+    font-size: clamp(1rem, 4.1vw, 1.25rem);
+    white-space: normal;
   }
 
   .hero-blob-yellow {
@@ -1138,26 +1190,34 @@ blockquote cite {
   }
 
   .hero-flower-trumpet {
-    top: 78px;
-    right: -64px;
-    width: min(44vw, 190px);
+    top: 72px;
+    right: -54px;
+    z-index: 1;
+    width: min(45vw, 172px);
   }
 
   .hero-flower-tambourine {
-    left: -30px;
-    bottom: 98px;
-    width: min(45vw, 185px);
+    left: -46px;
+    bottom: 84px;
+    z-index: 1;
+    width: min(48vw, 178px);
   }
 
   .hero-cartoon-band {
-    right: -28px;
-    bottom: 12px;
-    width: 390px;
+    right: -78px;
+    bottom: 0;
+    z-index: 1;
+    width: min(112vw, 390px);
     max-width: none;
   }
 
+  .hero-actions {
+    gap: 10px;
+    margin-top: 20px;
+  }
+
   .intro-section {
-    padding: 44px 20px 330px;
+    padding: 42px 16px 310px;
   }
 
   .intro-section h2 {
@@ -1166,27 +1226,36 @@ blockquote cite {
 
   .intro-section .section-copy p {
     font-size: clamp(0.98rem, 4.1vw, 1.2rem);
+    line-height: 1.38;
     word-spacing: 0.04em;
   }
 
+  .intro-section blockquote {
+    margin: 16px 0;
+    padding: 14px 14px 14px 16px;
+    border-left-width: 7px;
+    border-radius: 0 16px 16px 0;
+    font-size: clamp(1rem, 4.2vw, 1.18rem);
+  }
+
   .intro-piano-blob {
-    right: -260px;
-    bottom: 22px;
-    width: 540px;
+    right: -250px;
+    bottom: 18px;
+    width: 500px;
   }
 
   .intro-children {
     left: 24px;
     right: auto;
-    bottom: 16px;
-    width: 145px;
+    bottom: 18px;
+    width: 132px;
   }
 
   .intro-doodle {
     left: auto;
-    right: 28px;
-    top: 156px;
-    width: 98px;
+    right: 22px;
+    top: 132px;
+    width: 84px;
   }
 
   .educator-section .section-media {
@@ -1218,12 +1287,59 @@ blockquote cite {
     flex-direction: column;
   }
 
+  .book-section {
+    gap: 24px;
+  }
+
+  .price-card {
+    margin: 20px 0 0;
+    padding: 18px;
+    border-width: 6px;
+  }
+
+  .price-card strong,
+  .price-card span {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .booking-form {
+    gap: 16px;
+    padding: 18px 14px;
+    border-width: 5px;
+    border-radius: 20px;
+  }
+
   .booking-form fieldset {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .booking-form legend {
+    font-size: clamp(1.25rem, 6vw, 1.55rem);
+  }
+
+  .booking-form input,
+  .booking-form select,
+  .booking-form textarea {
+    min-height: 48px;
+    border-width: 3px;
+    border-radius: 13px;
+    font-size: 16px;
+    padding: 11px 12px;
+  }
+
+  .booking-form .choice-group label,
+  .booking-form .agreement {
+    min-height: 50px;
+    padding: 11px 12px;
+    border-width: 3px;
+    font-size: 0.98rem;
   }
 
   .button {
+    min-height: 54px;
     width: 100%;
+    padding-inline: 16px;
   }
 
   .activity-grid,

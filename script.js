@@ -9,12 +9,14 @@ const sections = navLinks
 menuToggle?.addEventListener("click", () => {
   const isOpen = body.classList.toggle("nav-open");
   menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
 });
 
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
     body.classList.remove("nav-open");
     menuToggle?.setAttribute("aria-expanded", "false");
+    menuToggle?.setAttribute("aria-label", "Open menu");
   });
 });
 
