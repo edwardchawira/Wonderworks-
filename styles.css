@@ -393,7 +393,7 @@ h3 {
 
 .intro-section .section-copy {
   position: relative;
-  z-index: 3;
+  z-index: 5;
   max-width: 590px;
   align-self: center;
 }
@@ -433,10 +433,11 @@ h3 {
 
 .intro-children {
   position: absolute;
-  left: clamp(610px, 42vw, 760px);
+  right: clamp(160px, 18vw, 300px);
   bottom: clamp(44px, 5vw, 78px);
-  z-index: 4;
-  width: clamp(150px, 13vw, 220px);
+  left: auto;
+  z-index: 2;
+  width: clamp(150px, 14vw, 230px);
 }
 
 .intro-doodle {
@@ -1022,7 +1023,7 @@ blockquote cite {
   }
 
   .intro-children {
-    left: clamp(210px, 28vw, 300px);
+    left: auto;
     right: auto;
     bottom: 22px;
     width: clamp(150px, 20vw, 190px);
@@ -1135,7 +1136,9 @@ blockquote cite {
 
   .hero-copy {
     z-index: 6;
-    width: min(100%, 430px);
+    width: 100%;
+    min-width: 0;
+    max-width: 430px;
     transform: none;
   }
 
@@ -1156,7 +1159,7 @@ blockquote cite {
   }
 
   h1 {
-    font-size: clamp(3.1rem, 15vw, 4.35rem);
+    font-size: clamp(2.65rem, 13.3vw, 4.05rem);
     line-height: 0.82;
   }
 
@@ -1171,8 +1174,8 @@ blockquote cite {
   .hero-strip {
     max-width: 100%;
     margin-top: 18px;
-    padding: 9px 14px;
-    font-size: clamp(1rem, 4.1vw, 1.25rem);
+    padding: 9px 12px;
+    font-size: clamp(0.95rem, 3.8vw, 1.18rem);
     white-space: normal;
   }
 
@@ -1255,10 +1258,13 @@ blockquote cite {
   }
 
   .intro-children {
-    left: 18px;
+    position: relative;
+    left: auto;
     right: auto;
-    bottom: 22px;
-    width: 118px;
+    bottom: auto;
+    z-index: 2;
+    width: min(70vw, 250px);
+    margin: -88px auto 0;
   }
 
   .intro-doodle {
@@ -1356,6 +1362,7 @@ blockquote cite {
     min-height: 54px;
     width: 100%;
     padding-inline: 16px;
+    font-size: clamp(0.94rem, 4.2vw, 1rem);
   }
 
   .activity-grid,
@@ -1381,5 +1388,60 @@ blockquote cite {
     width: 45%;
     min-width: 170px;
     margin-top: -52px;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-header {
+    padding-inline: 10px;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .star-logo {
+    width: 34px;
+    height: 34px;
+  }
+
+  .menu-toggle {
+    width: 42px;
+    height: 40px;
+    border-width: 4px;
+  }
+
+  .hero {
+    padding: 72px 12px 190px;
+  }
+
+  .hero-location {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2.45rem, 12.8vw, 2.8rem);
+  }
+
+  h1 span:last-child {
+    margin-left: 16px;
+  }
+
+  .hero-strip {
+    padding-inline: 10px;
+    font-size: 0.95rem;
+  }
+
+  .button {
+    padding-inline: 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-flower-trumpet {
+    top: 96px;
+    right: -118px;
+    width: min(42vw, 165px);
   }
 }
