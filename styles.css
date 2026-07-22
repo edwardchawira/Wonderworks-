@@ -433,7 +433,7 @@ h3 {
 
 .intro-children {
   position: absolute;
-  right: clamp(160px, 18vw, 300px);
+  right: clamp(430px, 31vw, 640px);
   bottom: clamp(44px, 5vw, 78px);
   left: auto;
   z-index: 2;
@@ -1023,7 +1023,7 @@ blockquote cite {
   }
 
   .intro-children {
-    left: auto;
+    left: clamp(32px, 8vw, 86px);
     right: auto;
     bottom: 22px;
     width: clamp(150px, 20vw, 190px);
